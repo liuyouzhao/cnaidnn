@@ -1,0 +1,33 @@
+#!/bin/bash
+
+echo "# Your tensorflow version (default 1.3):"
+read TF_VERSION
+if [ -z $TF_VERSION ]
+then
+	TF_VERSION=1.3
+fi
+echo "  Project will be built based on your tensorflow r$TF_VERSION"
+echo ""
+
+echo "# Your bazel-tensorflow path (default /mnt/1t/AI/tensorflow/bazel-tensorflow):"
+read TF_PATH
+if [ -z $TF_PATH ]
+then
+    TF_PATH="/mnt/1t/AI/tensorflow/bazel-tensorflow"
+fi
+echo "  Set bazel-tensorflow path as $TF_PATH"
+rm -rf ./tensorflow
+ln -s $TF_PATH ./thirdparty/tf-out
+
+rm -rf ./thirdparty/tf-ext
+rm -rf ./thirdparty/tf-bin
+mkdir ./thirdparty/tf-ext
+mkdir ./thirdparty/tf-bin
+
+if [ $TF_VERSION == "1.3" ]
+then
+	cp -R $TF_PATH/bazel-out/k8-opt/bin/tensorflow/tools/pip_package/build_pip_package.runfiles/eigen_archive ./thirdparty/tf-ext/eigen_archive
+	cp -R $TF_PATH/bazel-out/k8-opt/bin/tensorflow/tools/pip_package/build_pip_package.runfiles/org_tensorflow/external/com_google_absl ./thirdparty/tf-ext/com_google_absl
+	cp -R $TF_PATH/bazel-out/k8-opt/bin/tensorflow/tools/pip_package/build_pip_package.runfiles/org_tensorflow/external/protobuf_archive/src ./thirdparty/tf-ext/protobuf_archive
+	cp -R $TF_PATH/bazel-out/k8-opt/bin/tensorflow/*.so ./thirdparty/tf-bin/
+fi
