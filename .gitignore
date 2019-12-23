@@ -1,0 +1,5 @@
+/*.user
+/build/*
+**/data/*
+!**/data/*.md
+**/thirdparty/tf-*

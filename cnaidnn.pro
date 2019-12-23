@@ -3,7 +3,7 @@ QT -= gui
 
 CONFIG += c++11
 
-TARGET = tensorflow_qt
+TARGET = cnaidnn
 CONFIG += console
 CONFIG -= app_bundle
 
