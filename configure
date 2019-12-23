@@ -16,7 +16,7 @@ then
     TF_PATH="/mnt/1t/AI/tensorflow/bazel-tensorflow"
 fi
 echo "  Set bazel-tensorflow path as $TF_PATH"
-rm -rf ./tensorflow
+rm -rf ./thirdparty/tf-out
 ln -s $TF_PATH ./thirdparty/tf-out
 
 rm -rf ./thirdparty/tf-ext
